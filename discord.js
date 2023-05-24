@@ -1,9 +1,9 @@
 //V13
 
-const { Client, Intents } = require('discord.js');
 const SerialPort = require('serialport');
+const { Client, GatewayIntentBits, Events, Partials } = require("discord.js");
+const client = new Client({ intents: Object.values(GatewayIntentBits).filter(x => typeof x === "string"), partials: Object.values(Partials).filter(x => typeof x === "string")});
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 const port = new SerialPort('COM3', { baudRate: 9600 }); // Arduino'nun bağlı olduğu seri portu ve baud hızını ayarlayın
 
 client.on('ready', () => {
